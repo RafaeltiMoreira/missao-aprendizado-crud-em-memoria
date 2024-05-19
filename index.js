@@ -26,4 +26,12 @@ app.post('/personagem', function (req, res) {
   res.send('Item adicionado com sucesso: ' + novoItem)
 })
 
+app.put('/personagem/:id', function (req, res) {
+  const id = req.params.id
+  const body = req.body
+  const novoItem = body.nome
+  lista[id - 1] = novoItem
+  res.send('Item atualizado com sucesso: ' + id + ' - ' + novoItem)
+})
+
 app.listen(3000)
