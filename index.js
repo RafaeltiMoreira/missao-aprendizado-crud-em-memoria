@@ -22,6 +22,15 @@ app.use(express.json())
 app.post('/personagem', function (req, res) {
   const body = req.body
   const novoItem = body.nome
+
+  if (!novoItem) {
+    return res.send('Corpo da requisição deve conter a propriedade `nome`.')
+  }
+
+  if (lista.includes(novoItem)) {
+    return res.send('Esse item `' + novoItem + '` já existe na lista.')
+  }
+
   lista.push(novoItem)
   res.send('Item adicionado com sucesso: ' + novoItem)
 })
@@ -30,6 +39,15 @@ app.put('/personagem/:id', function (req, res) {
   const id = req.params.id
   const body = req.body
   const novoItem = body.nome
+
+  if (!novoItem) {
+    return res.send('Corpo da requisição deve conter a propriedade `nome`.')
+  }
+
+  if (lista.includes(novoItem)) {
+    return res.send('Esse item `' + novoItem + '` já existe na lista.')
+  }
+
   lista[id - 1] = novoItem
   res.send('Item atualizado com sucesso: ' + id + ' - ' + novoItem)
 })
