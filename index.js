@@ -14,6 +14,11 @@ app.get('/personagem', function (req, res) {
 app.get('/personagem/:id', function (req, res) {
   const id = req.params.id
   const item = lista[id - 1]
+
+  if (!item) {
+    return res.status(404).send('Item não encontrado.')
+  }
+
   res.send(item)
 })
 
@@ -37,6 +42,11 @@ app.post('/personagem', function (req, res) {
 
 app.put('/personagem/:id', function (req, res) {
   const id = req.params.id
+
+  if (!lista[id - 1]) {
+    return res.status(404).send('Item não encontrado.')
+  }
+
   const body = req.body
   const novoItem = body.nome
 
@@ -54,6 +64,11 @@ app.put('/personagem/:id', function (req, res) {
 
 app.delete('/personagem/:id', function (req, res) {
   const id = req.params.id
+
+  if (!lista[id - 1]) {
+    return res.status(404).send('Item não encontrado.')
+  }
+
   delete lista[id - 1]
   res.send('Item removido com sucesso: ' + id)
 })
