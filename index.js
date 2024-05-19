@@ -24,15 +24,15 @@ app.post('/personagem', function (req, res) {
   const novoItem = body.nome
 
   if (!novoItem) {
-    return res.send('Corpo da requisição deve conter a propriedade `nome`.')
+    return res.status(400).send('Corpo da requisição deve conter a propriedade `nome`.')
   }
 
   if (lista.includes(novoItem)) {
-    return res.send('Esse item `' + novoItem + '` já existe na lista.')
+    return res.status(409).send('Esse item `' + novoItem + '` já existe na lista.')
   }
 
   lista.push(novoItem)
-  res.send('Item adicionado com sucesso: ' + novoItem)
+  res.status(201).send('Item adicionado com sucesso: ' + novoItem)
 })
 
 app.put('/personagem/:id', function (req, res) {
@@ -41,15 +41,15 @@ app.put('/personagem/:id', function (req, res) {
   const novoItem = body.nome
 
   if (!novoItem) {
-    return res.send('Corpo da requisição deve conter a propriedade `nome`.')
+    return res.status(400).send('Corpo da requisição deve conter a propriedade `nome`.')
   }
 
   if (lista.includes(novoItem)) {
-    return res.send('Esse item `' + novoItem + '` já existe na lista.')
+    return res.status(409).send('Esse item `' + novoItem + '` já existe na lista.')
   }
 
   lista[id - 1] = novoItem
-  res.send('Item atualizado com sucesso: ' + id + ' - ' + novoItem)
+  res.status(201).send('Item atualizado com sucesso: ' + id + ' - ' + novoItem)
 })
 
 app.delete('/personagem/:id', function (req, res) {
